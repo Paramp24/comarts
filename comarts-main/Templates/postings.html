@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comarts</title>
+</head>
+<body>
+    <button class="postad">Post Ad</button>
+
+    <form id="submit" action="/upload" method="post" enctype='multipart/form-data'>
+        <div class="postadd"> 
+
+            <input type="text" class="adTitle" name="adTitle" id="adTitle" placeholder="Ad Title" required value="Ad Title">
+            <input type="text" class="category" id="category" name="category" placeholder="Category" required value="Category">
+            
+            <input type="file" class="files" name = 'files' id="files" multiple>
+
+            <input type="text" id="description" name="description" placeholder="Description" required value="Description">
+            <button type="submit">Submit</button> 
+            
+            
+            <div></div>
+
+        </div>
+    </form>
+</body>
+<script src="/static/script/comarts.js"></script>
+</html>
