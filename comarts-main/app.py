@@ -1,7 +1,8 @@
-from flask import Flask, render_template, jsonify, request
+from flask import Flask, render_template, jsonify, request, session
 from python_scripts.UserAuthentication import UserAuthentication
 
 app = Flask(__name__)
+app.secret_key = 'your_secret_key_here'
 user_authentication = UserAuthentication()
 
 
@@ -33,24 +34,15 @@ def postings():
 
 @app.route('/upload', methods=['POST'])
 def postAds():
-    '''
-    CREATE TABLE IF NOT EXISTS postingData (
-            posting_user_id INTEGER PRIMARY KEY AUTO_INCREMENT, 
-            file_data_1 BLOB,
-            file_data_2 BLOB,
-            file_data_3 BLOB,
-            file_data_4 BLOB,
-            file_data_5 BLOB,
-            text_input1 TEXT,
-            text_input2 TEXT,
-            text_input3 TEXT,
-            text_input4 TEXT,
-            FOREIGN KEY (user_id) REFERENCES users (user_id)
-    '''
+    
     files = request.files.getlist('files')
     category = request.form.get('category')
     description = request.form.get('description')
     adTitle = request.form.get('adTitle')
+
+    user_id = session.get('user_id')
+
+    file_data = [file.read() for file in files]
 
     return render_template('comarts.html')
 

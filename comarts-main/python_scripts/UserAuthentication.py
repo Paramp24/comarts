@@ -1,4 +1,5 @@
 import sqlite3
+from flask import session
 
 class UserAuthentication:
     # this function will take in a database name and define it as a class characteristic
@@ -64,5 +65,12 @@ class UserAuthentication:
             cursor.execute('SELECT * FROM users WHERE username=:c', {'c': loginInfo})
 
         user_search = cursor.fetchone()
+
+        if user_search:
+            # Extract user_id and store it in the session
+            user_id = user_search[2]  # Assuming user_id is the third column
+            session['user_id'] = user_id
+
+
         userDB.close()
         return user_search
